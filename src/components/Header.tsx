@@ -14,25 +14,25 @@ const navItems = [
 ];
 
 export const Header: React.FC<Props> = ({ activeTab, setActiveTab }) => (
-  <header className="bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg">
-    <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-      <div className="flex items-center space-x-2">
+  <header className="bg-primary text-text-primary-light shadow-lg">
+    <div className="container mx-auto px-4 py-4 flex flex-wrap items-center justify-between"> {/* Added flex-wrap */}
+      <div className="flex items-center space-x-2 mb-2 sm:mb-0"> {/* Added mb-2 sm:mb-0 for spacing when wrapped */}
         <BookOpen className="h-8 w-8" />
         <h1 className="text-2xl font-bold">AI Study Assistant</h1>
       </div>
-      <nav className="flex space-x-4">
+      <nav className="flex flex-wrap space-x-2 sm:space-x-4"> {/* Added flex-wrap, adjusted spacing */}
         {navItems.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
             onClick={() => setActiveTab(id)}
             className={`flex items-center space-x-1 px-3 py-2 rounded-lg transition-colors ${
               activeTab === id
-                ? 'bg-white text-blue-600'
-                : 'hover:bg-blue-500'
+                ? 'bg-accent text-text-primary-light' // Active state
+                : 'hover:bg-accent hover:text-text-primary-light' // Inactive hover state
             }`}
           >
             <Icon className="h-4 w-4" />
-            <span>{label}</span>
+            <span className="hidden sm:inline">{label}</span> {/* Hide label on xs screens */}
           </button>
         ))}
       </nav>

@@ -11,15 +11,15 @@ export const MaterialCard: React.FC<{ material: Material }> = ({ material }) => 
     : ''
 
   return (
-    <div className="p-4 border rounded-lg hover:shadow-md transition-shadow bg-white">
+    <div className="p-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-md hover:shadow-lg transition-shadow">
       {/* Title + Tags */}
       <div className="flex justify-between items-center mb-2">
-        <h4 className="font-semibold text-lg">{material.title}</h4>
+        <h4 className="font-semibold text-lg text-gray-900 dark:text-white">{material.title}</h4>
         <div className="flex space-x-2">
-          <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-xs">
+          <span className="bg-primary/20 text-primary dark:bg-primary/30 dark:text-primary px-2 py-1 rounded-full text-xs">
             {material.subject}
           </span>
-          <span className="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">
+          <span className="bg-accent/20 text-accent dark:bg-accent/30 dark:text-accent px-2 py-1 rounded-full text-xs">
             {material.topic}
           </span>
         </div>
@@ -27,11 +27,11 @@ export const MaterialCard: React.FC<{ material: Material }> = ({ material }) => 
 
       {/* Description */}
       {material.description && (
-        <p className="text-gray-600 mb-3">{material.description}</p>
+        <p className="text-gray-600 dark:text-gray-300 mb-3">{material.description}</p>
       )}
 
       {/* Date Added */}
-      <div className="text-sm text-gray-500 mb-3">
+      <div className="text-sm text-gray-500 dark:text-gray-400 mb-3">
         Added on {new Date(material.date_added).toLocaleDateString()}
       </div>
 
@@ -46,7 +46,7 @@ export const MaterialCard: React.FC<{ material: Material }> = ({ material }) => 
           href={`${API_BASE}/uploads/${filename}`}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center text-blue-600 hover:text-blue-800"
+          className="inline-flex items-center text-accent hover:text-accent/80 dark:text-accent dark:hover:text-accent/80"
         >
           <Download className="h-4 w-4 mr-1" />
           {filename || 'Download'}

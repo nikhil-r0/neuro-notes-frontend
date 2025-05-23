@@ -13,11 +13,11 @@ export const MaterialsList: React.FC<{ materials: Material[] }> = ({ materials }
 
   return (
     <div className="space-y-6">
-      <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
         <SearchBar value={term} onChange={setTerm} />
-        <h3 className="text-lg font-semibold mb-4">Study Materials ({filtered.length})</h3>
+        <h3 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">Study Materials ({filtered.length})</h3>
         {filtered.length === 0
-          ? <p className="text-gray-500">{term ? 'No matches.' : 'No materials yet.'}</p>
+          ? <p className="text-gray-500 dark:text-gray-400">{term ? 'No matches.' : 'No materials yet.'}</p>
           : <div className="grid gap-4 md:grid-cols-2">{filtered.map(m => <MaterialCard key={m.material_id} material={m} />)}</div>
         }
       </div>
