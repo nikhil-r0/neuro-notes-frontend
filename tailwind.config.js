@@ -7,6 +7,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        'text-primary-light': '#FFFFFF',
         primary: {
           DEFAULT: '#2563EB',
           50: '#EFF6FF',
@@ -66,4 +67,8 @@ module.exports = {
     },
   },
   plugins: [],
+  safelist: [
+    'text-secondary-800',
+    'bg-secondary-50'
+  ]
 };
