@@ -2,61 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  /* font-family is now handled by Tailwind's theme config (font-sans) */
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  /* Default to dark mode colors from the new palette */
-  color: theme('colors.text-primary-light');
-  background-color: theme('colors.secondary');
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: theme('colors.accent');
-  text-decoration: inherit;
-}
-a:hover {
-  /* Consider a slightly darker or lighter shade of accent if available, or use brightness/opacity */
-  filter: brightness(90%); /* Example: slightly darken accent on hover */
-}
-
-body {
-  margin: 0;
-  /* place-items: center; /* This can be too restrictive globally, apply flex/grid centering per layout */
-  min-width: 320px;
-  min-height: 100vh;
-  /* Apply base font family using Tailwind's utility class on body for better specificity */
-  @apply font-sans;
-}
-
-/* Removed h1 global styles. Use Tailwind text utilities like .text-4xl in components. */
-
-/* Removed default button styles. These should be utility classes or component-specific styles. */
-
-@media (prefers-color-scheme: light) {
+@layer base {
   :root {
-    color: theme('colors.text-primary-dark');
-    background-color: theme('colors.white'); /* Assuming you want a plain white background for light mode */
+    line-height: 1.5;
+    font-weight: 400;
+    color-scheme: light dark;
+    @apply text-secondary-800 bg-secondary-50;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  a:hover {
-    filter: brightness(110%); /* Example: slightly lighten accent on hover for light mode */
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    @apply font-sans bg-secondary-50;
   }
-  /* Removed button background for light mode, should be handled by utilities */
+
+  a {
+    @apply font-medium text-accent-600 hover:text-accent-700 transition-colors;
+  }
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
   }
-  to {
-    transform: rotate(360deg);
+
+  .btn-primary {
+    @apply btn bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
   }
+
+  .btn-secondary {
+    @apply btn bg-white text-secondary-700 border border-secondary-300 hover:bg-secondary-50 focus:ring-secondary-500;
+  }
+
+  .input {
+    @apply block w-full px-3 py-2 rounded-lg border border-secondary-300 shadow-sm
+    focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500
+    text-secondary-900 placeholder-secondary-400
+    dark:bg-secondary-800 dark:border-secondary-600 dark:text-white;
+  }
+
+  .card {
+    @apply bg-white dark:bg-secondary-800 rounded-xl shadow-sm border border-secondary-200 dark:border-secondary-700 p-6;
+  }
+}
+
+.dark {
+  @apply bg-secondary-900 text-white;
 }
