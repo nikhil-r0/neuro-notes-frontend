@@ -58,14 +58,16 @@ export const UploadMaterialForm: React.FC<Props> = ({ onMaterialUploaded }) => {
   }
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6">
-      <h3 className="text-lg font-semibold mb-4 flex items-center">
+    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-6 dark:bg-gray-800">
+      <h3 className="text-lg font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
         <Upload className="h-5 w-5 mr-2" /> Upload Study Material (File)
       </h3>
 
       {message && (
         <div className={`mb-4 p-3 rounded-lg ${
-          message.success ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
+          message.success
+            ? 'bg-accent/20 text-accent dark:bg-accent/30 dark:text-accent'
+            : 'bg-red-500/20 text-red-600 dark:bg-red-500/30 dark:text-red-400'
         }`}>
           {message.text}
         </div>
@@ -73,7 +75,7 @@ export const UploadMaterialForm: React.FC<Props> = ({ onMaterialUploaded }) => {
 
       <div className="space-y-4">
         {/* File Picker */}
-        <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
+        <div className="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-4 text-center">
           <input
             id="file-upload"
             type="file"
@@ -82,34 +84,36 @@ export const UploadMaterialForm: React.FC<Props> = ({ onMaterialUploaded }) => {
             onChange={e => setFile(e.target.files?.[0] || null)}
           />
           <label htmlFor="file-upload" className="cursor-pointer flex flex-col items-center">
-            <Upload className="h-12 w-12 text-gray-400 mb-2" />
-            <span className="text-gray-600">
+            <Upload className="h-12 w-12 text-gray-400 dark:text-gray-500 mb-2" />
+            <span className="text-gray-600 dark:text-gray-300">
               {file ? file.name : 'Click to select a file'}
             </span>
-            <span className="text-sm text-gray-400">PDF, DOCX, TXT, PPTX supported</span>
+            <span className="text-sm text-gray-400 dark:text-gray-500">PDF, DOCX, TXT, PPTX supported</span>
           </label>
         </div>
 
         {/* Title */}
         <div>
-          <label className="block mb-1 font-medium">
+          <label htmlFor="uploadTitle" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Title <span className="text-red-500">*</span>
           </label>
           <input
+            id="uploadTitle"
             type="text"
             value={formData.title}
             onChange={e => setFormData(fd => ({ ...fd, title: e.target.value }))}
-            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-purple-500"
+            className="block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-accent focus:border-accent sm:text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-accent dark:focus:border-accent"
           />
         </div>
 
         {/* Description */}
         <div>
-          <label className="block mb-1 font-medium">Description</label>
+          <label htmlFor="uploadDescription" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
           <textarea
+            id="uploadDescription"
             value={formData.description}
             onChange={e => setFormData(fd => ({ ...fd, description: e.target.value }))}
-            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-purple-500"
+            className="block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-accent focus:border-accent sm:text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-accent dark:focus:border-accent"
             rows={3}
           />
         </div>
@@ -117,25 +121,27 @@ export const UploadMaterialForm: React.FC<Props> = ({ onMaterialUploaded }) => {
         {/* Subject & Topic */}
         <div className="grid md:grid-cols-2 gap-4">
           <div>
-            <label className="block mb-1 font-medium">
+            <label htmlFor="uploadSubject" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Subject <span className="text-red-500">*</span>
             </label>
             <input
+              id="uploadSubject"
               type="text"
               value={formData.subject}
               onChange={e => setFormData(fd => ({ ...fd, subject: e.target.value }))}
-              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-purple-500"
+              className="block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-accent focus:border-accent sm:text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-accent dark:focus:border-accent"
             />
           </div>
           <div>
-            <label className="block mb-1 font-medium">
+            <label htmlFor="uploadTopic" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Topic <span className="text-red-500">*</span>
             </label>
             <input
+              id="uploadTopic"
               type="text"
               value={formData.topic}
               onChange={e => setFormData(fd => ({ ...fd, topic: e.target.value }))}
-              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-purple-500"
+              className="block w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-accent focus:border-accent sm:text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-accent dark:focus:border-accent"
             />
           </div>
         </div>
@@ -144,7 +150,7 @@ export const UploadMaterialForm: React.FC<Props> = ({ onMaterialUploaded }) => {
         <button
           onClick={handleSubmit}
           disabled={loading || !file}
-          className="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 disabled:opacity-50 transition"
+          className="w-full bg-primary text-text-primary-light hover:bg-blue-700 disabled:opacity-50 transition py-3 px-4 rounded-md shadow-sm"
         >
           {loading ? 'Uploading…' : 'Upload Material'}
         </button>
