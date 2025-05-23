@@ -1,55 +1,90 @@
 import React, { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 const Register: React.FC = () => {
-  const [name, setName] = useState(''), [email, setEmail] = useState(''),
-        [password, setPassword] = useState(''), [error, setError] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const { register } = useContext(AuthContext);
 
   const submit = async () => {
     try {
       await register(name, email, password);
-    } catch (e:any) {
+    } catch (e: any) {
       setError(e.message);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow dark:bg-gray-800">
-        <h2 className="text-2xl font-bold mb-6 text-center text-gray-900 dark:text-white">Register</h2>
-        {error && <div className="mb-4 text-red-600 dark:text-red-400 text-sm">{error}</div>}
-
-        <div>
-          <label htmlFor="fullNameReg" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full Name</label>
-          <input
-            id="fullNameReg"
-            className="block w-full p-3 mb-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-accent focus:border-accent sm:text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-accent dark:focus:border-accent"
-            type="text" placeholder="Full Name"
-            value={name} onChange={e => setName(e.target.value)} />
+    <div className="min-h-screen flex items-center justify-center bg-secondary-50 dark:bg-secondary-900 px-4">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-secondary-900 dark:text-white">Create account</h2>
+          <p className="mt-2 text-secondary-600 dark:text-secondary-400">Join us today</p>
         </div>
 
-        <div>
-          <label htmlFor="emailReg" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Email</label>
-          <input
-            id="emailReg"
-            className="block w-full p-3 mb-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-accent focus:border-accent sm:text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-accent dark:focus:border-accent"
-            type="email" placeholder="Email"
-            value={email} onChange={e => setEmail(e.target.value)} />
-        </div>
+        <div className="card space-y-6">
+          {error && (
+            <div className="p-3 text-sm bg-red-50 text-red-600 dark:bg-red-900/30 dark:text-red-400 rounded-lg">
+              {error}
+            </div>
+          )}
 
-        <div>
-          <label htmlFor="passwordReg" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Password</label>
-          <input
-            id="passwordReg"
-            className="block w-full p-3 mb-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-accent focus:border-accent sm:text-sm text-gray-900 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-accent dark:focus:border-accent"
-            type="password" placeholder="Password"
-            value={password} onChange={e => setPassword(e.target.value)} />
+          <div className="space-y-1">
+            <label htmlFor="fullName" className="block text-sm font-medium text-secondary-700 dark:text-secondary-300">
+              Full Name
+            </label>
+            <input
+              id="fullName"
+              type="text"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              placeholder="John Doe"
+              className="input"
+            />
+          </div>
+
+          <div className="space-y-1">
+            <label htmlFor="email" className="block text-sm font-medium text-secondary-700 dark:text-secondary-300">
+              Email
+            </label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              className="input"
+            />
+          </div>
+
+          <div className="space-y-1">
+            <label htmlFor="password" className="block text-sm font-medium text-secondary-700 dark:text-secondary-300">
+              Password
+            </label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              placeholder="••••••••"
+              className="input"
+            />
+          </div>
+
+          <button onClick={submit} className="btn-primary w-full">
+            Create Account
+          </button>
+
+          <p className="text-center text-sm text-secondary-600 dark:text-secondary-400">
+            Already have an account?{' '}
+            <Link to="/login" className="font-medium text-primary-600 hover:text-primary-700">
+              Sign in
+            </Link>
+          </p>
         </div>
-        <button onClick={submit}
-          className="w-full bg-primary text-text-primary-light hover:bg-blue-700 py-3 px-4 rounded-md shadow-sm transition-colors">
-          Sign Up
-        </button>
       </div>
     </div>
   );
