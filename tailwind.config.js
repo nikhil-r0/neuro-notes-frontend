@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
@@ -7,7 +7,6 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'text-primary-light': '#FFFFFF',
         primary: {
           DEFAULT: '#2563EB',
           50: '#EFF6FF',
@@ -55,20 +54,7 @@ module.exports = {
         'inner-sm': 'inset 0 1px 2px 0 rgb(0 0 0 / 0.05)',
         subtle: '0 1px 2px 0 rgb(0 0 0 / 0.02)',
       },
-      animation: {
-        'logo-spin': 'logo-spin infinite 20s linear',
-      },
-      keyframes: {
-        'logo-spin': {
-          from: { transform: 'rotate(0deg)' },
-          to: { transform: 'rotate(360deg)' },
-        },
-      },
     },
   },
   plugins: [],
-  safelist: [
-    'text-secondary-800',
-    'bg-secondary-50'
-  ]
-};
+}
